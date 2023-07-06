@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Leaderboard
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/leaderboard.css' %}" />
+{% endblock %}
+
+{% block content %}
+    <h1>Leaderboard</h1>
+    
+    <ul id="leaderboard">
+      <!-- The list will be updated by JavaScript -->
+      
+    </ul>
+    <script>
+      const leaderboard = document.getElementById('leaderboard');
+
+      function updateObjectList() {
+          fetch('{% url "leaderboard_app:leaderboard_update_api" %}')
+              .then((response) => response.json())
+              .then((data) => {
+                  leaderboard.innerHTML = '';
+                  previous_score = -1.0;
+                  competitor_index = 1;
+                  competitor_rank = 1;
+                  data.forEach((competitor) => {
+                      // Create the 'li' element
+                    const li = document.createElement('li');
+                    li.classList.add('competitor_li');
+                    //li.classList.add('animate__animated');
+                    //li.classList.add('animate__pulse');
+                    
+                    if(competitor.score != previous_score){
+                      competitor_rank = competitor_index
+                    }
+                    
+                    const rankDiv = document.createElement('div');
+                    rankDiv.classList.add('competitor_rank');
+                    rankDiv.textContent = competitor_rank;
+                    li.appendChild(rankDiv);
+
+                    // Create the 'div' element for the competitor's name
+                    const nameDiv = document.createElement('div');
+                    nameDiv.classList.add('competitor_name');
+                    nameDiv.textContent = competitor.name;
+                    li.appendChild(nameDiv);
+
+                    // Create the 'div' element for the competitor's score
+                    const scoreDiv = document.createElement('div');
+                    scoreDiv.classList.add('competitor_score');
+                    parsed_score = parseFloat(competitor.score);
+                    if(parsed_score <= 0 ){
+                      scoreDiv.textContent = "--";
+                      rankDiv.textContent = "--";
+                    }else{
+                      scoreDiv.textContent = competitor.score;
+                    }
+                    li.appendChild(scoreDiv);
+                    
+                    const lapsLabelDiv = document.createElement('div');
+                    lapsLabelDiv.classList.add('competitor_laps_label');
+                    lapsLabelDiv.textContent = "LAPS SCORE";
+                    li.appendChild(lapsLabelDiv);
+
+                    const lapsDiv = document.createElement('div');
+                    lapsDiv.classList.add('competitor_laps');
+                    lapsDiv.textContent = competitor.laps;
+                    li.appendChild(lapsDiv);
+
+                    // structure:
+                    // <li class="competitor_li">
+                    //   <div class="competitor_rank"></div>
+                    //   <div class="competitor_name"></div>
+                    //   <div class="competitor_score"></div>
+                    //   <div class="competitor_laps_label">LAPS SCORE</div>
+                    //   <div class="competitor_laps"></div>
+                    // </li>
+
+                    
+                    leaderboard.appendChild(li);
+                    previous_score = competitor.score;
+                    competitor_index ++;
+                  });
+              });
+      }
+
+      // Call the function to update the list initially
+      updateObjectList();
+
+      // Periodically update the list every 5000 milliseconds (5 seconds)
+      setInterval(updateObjectList, 1000);
+    </script>
+    <!--<script type="text/javascript" src="{% static "js/leaderboard_update.js" %}"></script>-->
+{% endblock %}

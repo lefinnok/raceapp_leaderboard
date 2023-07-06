@@ -1,0 +1,60 @@
+div{
+	word-spacing:10px;
+	letter-spacing:3px;
+}
+
+h1 {
+	font-size: 60px;
+	text-align:center;
+	margin-top: 30px;
+	letter-spacing:45px;
+}
+
+#leaderboard{
+	margin-top: 30px;
+	overflow: scroll;
+	height:100%;
+}
+
+.competitor_li{
+	width: 800px;
+	height: 228px;
+	margin: 0 auto;
+	list-style-type: none;
+}
+
+.competitor_rank{
+	position: absolute;
+	font-size: 80px;
+	font-weight: 800;
+	
+}
+
+.competitor_name{
+	position: absolute;
+	font-size: 80px;
+	margin-left: 110px;
+	margin-top: 0px;
+	font-weight: 600;
+	letter-spacing:30px;
+}
+
+.competitor_score{
+	position: absolute;
+	font-size: 80px;
+	margin-left: 600px;
+	margin-top: 100px;
+	font-weight: 600;
+	
+}
+
+.competitor_laps_label{
+	position: absolute;
+	margin-top: 130px;
+	font-weight: 600;	
+}
+.competitor_laps{
+	position: absolute;
+	font-weight: 300;
+	margin-top: 160px;
+}

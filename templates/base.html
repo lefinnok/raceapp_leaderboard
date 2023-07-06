@@ -1,0 +1,38 @@
+{% load static %}
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Default Title{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <header>
+        <!-- Add your site header content here -->
+        {% block header %}{% endblock %}
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- Default content can be placed here -->
+        {% endblock %}
+        <div class="lines">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </main>
+
+    <footer>
+        <!-- Add your site footer content here -->
+        {% block footer %}{% endblock %}
+    </footer>
+</body>
+</html>

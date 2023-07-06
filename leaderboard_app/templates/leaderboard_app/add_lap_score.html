@@ -1,0 +1,21 @@
+<!-- templates/add_lap_score.html -->
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+Add Lap Score
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/addlapscore.css' %}" />
+{% endblock %}
+
+{% block content %}
+    <h1>Add Lap Score</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}
